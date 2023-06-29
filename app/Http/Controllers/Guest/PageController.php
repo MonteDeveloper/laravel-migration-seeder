@@ -39,7 +39,23 @@ class PageController extends Controller
             $train->save();
         }
 
+        // Inserisci la terza riga solo se non è già presente nel database
+        if (Train::where('train_code', 'T003')->count() == 0) {
+            $train = new Train();
+            $train->company = 'Italo';
+            $train->departure_station = 'Parma';
+            $train->arrival_station = 'Reggio Emilia';
+            $train->departure_time = '09:00';
+            $train->arrival_time = '9:30';
+            $train->train_code = 'T003';
+            $train->number_of_carriages = 6;
+            $train->on_time = false;
+            $train->cancelled = false;
+            $train->save();
+        }
 
-        return view('welcome');
+        $trains_italo = Train::where('company', 'Italo')->get();
+
+        return view('welcome', compact('trains_italo'));
     }
 }
