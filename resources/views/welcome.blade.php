@@ -7,7 +7,7 @@
     </h2>
     <div>
         <ul>
-            @foreach ($trains_italo as $train)
+            @foreach ($trains as $train)
                 <li>
                     {{$train->train_code}}
                 </li>
